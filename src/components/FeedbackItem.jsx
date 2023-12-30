@@ -5,10 +5,7 @@ import Card from './shared/Card'
 import  PropTypes  from 'prop-types'
 import {FaTimes} from 'react-icons/fa'
 function FeedbackItem({item,handleDelete}) {
-    const deleteClick = (id)=>{
-
-      console.log(id)
-    }
+    
   return (
     <Card reverse={true}>
       <div className="num-display">{item.rating}</div>
