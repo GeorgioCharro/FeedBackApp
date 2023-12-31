@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import FeedbackData from "./data/FeedbackData";
 import FeedbackList from "./components/FeedbackList";
 import FeedBackStats from "./components/FeedBackStats";
+import FeedbackText from "./components/FeedbackText";
 
 function App(){
     
@@ -24,6 +25,7 @@ function App(){
             <Header />
             
             <div className="container">
+            <FeedbackText />  
             <FeedBackStats  feedback={feedback}/>
             <FeedbackList feedback={feedback} deleteFeedBack={deleteFeedBack}/>
             </div>
