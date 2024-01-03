@@ -6,6 +6,7 @@ import FeedbackList from "./components/FeedbackList";
 import FeedBackStats from "./components/FeedBackStats";
 import FeedbackText from "./components/FeedbackText";
 
+
 function App(){
     
   const[feedback,setFeedBack]=useState(FeedbackData)   
@@ -19,13 +20,19 @@ function App(){
 
 
   }
+
+  const addFeedBack = (newFeedBack)=>{
+
+    console.log(newFeedBack)
+
+  }
     return ( 
         
           <div className="container">
             <Header />
             
             <div className="container">
-            <FeedbackText />  
+            <FeedbackText handleAdd={addFeedBack}/>  
             <FeedBackStats  feedback={feedback}/>
             <FeedbackList feedback={feedback} deleteFeedBack={deleteFeedBack}/>
             </div>

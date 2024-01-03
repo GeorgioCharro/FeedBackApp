@@ -14,6 +14,6 @@ function FeedBackStats( {feedback}) {
         <h4>Average Rating : {isNaN(average) ? 0:average}</h4>
     </div>
   )
-}
+}        
 
 export default FeedBackStats
