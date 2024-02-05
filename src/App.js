@@ -5,7 +5,11 @@ import FeedbackData from "./data/FeedbackData";
 import FeedbackList from "./components/FeedbackList";
 import FeedBackStats from "./components/FeedBackStats";
 import FeedbackText from "./components/FeedbackText";
-import {BrowserRouter as Router, Route,Routes} from "react-router-dom";
+import AboutLinkIcon from "./components/AboutLinkIcon";
+import Post from "./components/Post";
+import { FeedBackProvider } from "./context/FeedBackContext";
+
+import {BrowserRouter as Router, Route,Routes,} from "react-router-dom";
 
 
 import { v4 as uuidv4 } from 'uuid';
@@ -33,6 +37,7 @@ function App(){
 
   }
     return ( 
+        <FeedBackProvider>
           <Router>
             
           
@@ -44,7 +49,7 @@ function App(){
                 <>
                 <FeedbackText handleAdd={addFeedBack}/>  
                 <FeedBackStats  feedback={feedback}/>
-                <FeedbackList feedback={feedback} deleteFeedBack={deleteFeedBack}/>
+                <FeedbackList  deleteFeedBack={deleteFeedBack}/>
                 </>
 
 
@@ -53,13 +58,18 @@ function App(){
             
               </Route>
               <Route path="/about" element={<AboutPage/>}/>
+              <Route path="/post/*" element={<Post/>}/>
               </Routes>
+              
+
+              
             </div>
-            
+            <AboutLinkIcon />
             
           
             
           </Router >
+          </FeedBackProvider>
     )
     
 }

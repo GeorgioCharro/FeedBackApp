@@ -2,7 +2,10 @@
 import FeedbackItem from './FeedbackItem'
 import  PropTypes  from 'prop-types'
 import {motion, AnimatePresence} from 'framer-motion'
-function FeedbackList({feedback, deleteFeedBack}) {
+import {useContext} from 'react'
+import FeedbackContext from '../context/FeedBackContext'
+function FeedbackList({deleteFeedBack}) {
+  const {feedback} = useContext(FeedbackContext)
 
   if(!feedback || feedback===0){
 

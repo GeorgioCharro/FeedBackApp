@@ -1,6 +1,8 @@
+import {useContext}from "react";
+import FeedBackContext from "../context/FeedBackContext";
 
-
-function FeedBackStats( {feedback}) {
+function FeedBackStats() {
+  const {feedback} = useContext(FeedBackContext)
 
     let average = feedback.reduce((acc,curr)=>{
 
