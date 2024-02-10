@@ -1,11 +1,11 @@
-import {useState,createContext} from 'react'
-import { v4 as uuidv4 } from 'uuid';
+import {useState,createContext, useEffect} from 'react'
+
 
 const FeedBackContext= createContext()
 
 
 export const FeedBackProvider = ({children}) => {
-
+const[isLoading,setIsLoading]=useState(true)
 const[feedback,setFeedBack]= useState([{
 
     id:1,
@@ -53,13 +53,24 @@ const FeedBackEdit = (item) => {
 
 }
 
-const FeedBackUpdate = (id,updateItem)=>{
-    
-    setFeedBack(feedback.map((item)=>(item.id === id? {...item,...updateItem}:item)))
+const FeedBackUpdate = async (id,updateItem)=>{
+
+    const response = await fetch(`feedback/${id}`,{
+
+      method:'PUT', headers:{
+
+        'Content-Type':'application/json',
+      },
+      body: JSON.stringify(updateItem)
+    })
+    const data = await response.json()
+    setFeedBack(feedback.map((item)=>(item.id === id? {...item,...data}:item)))
 
 
 }
-const deleteFeedBack = (id)=>{
+const deleteFeedBack = async (id)=>{
+
+    await fetch(`/feedback/${id}`, {method:'DELETE'})
 
     if(window.confirm('Are you sure you wanna delete this feedback?')){
 
@@ -69,20 +80,47 @@ const deleteFeedBack = (id)=>{
 
   }
 
-  const addFeedBack = (newFeedBack)=>{
-    newFeedBack.id = uuidv4();
-    console.log(newFeedBack)
-    setFeedBack([newFeedBack,...feedback]);
+  const addFeedBack = async (newFeedBack)=>{
+    const response = await fetch('/feedback',{
+
+      method:'POST',headers:{
+
+        'Content-Type':'application/json',
+      },
+
+      body: JSON.stringify(newFeedBack)
+    })
+    const data = response.json()
+    
+    
+    setFeedBack([data,...feedback]);
 
   }
+
+  const fetchFeedback = async () => {
+
+    const response = await fetch('/feedback')
+
+    const data = await response.json()
+    setFeedBack(data)
+    setIsLoading(false)
+  }
+
+  useEffect(()=> {
+
+    fetchFeedback()
+
+  },[])
 return <FeedBackContext.Provider value={{
     
     feedback,
     editFeedBack,
+    isLoading,
     deleteFeedBack,
     addFeedBack,
     FeedBackEdit,
     FeedBackUpdate,
+    
     }}> 
 
 

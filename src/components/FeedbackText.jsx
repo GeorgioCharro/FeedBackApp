@@ -4,7 +4,7 @@ import Button from "./shared/Button";
 import RatingSelect from "./RatingSelect";
 import { useContext } from "react";
 import FeedBackContext from "../context/FeedBackContext";
-function FeedbackText({handleAdd}) {
+function FeedbackText() {
     const {addFeedBack,editFeedBack,FeedBackUpdate} = useContext(FeedBackContext)
     const [text,setText]=useState('')
     const[btnDisabled,setButtonState]=useState(true)
